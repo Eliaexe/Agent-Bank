@@ -2,9 +2,10 @@
 
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import connectUser from "../utils/Fetch"
+import useTokenFetch from '../utils/Fetch';
 
 export default function Login() {
+  const { tokenFetch } = useTokenFetch();
     // const [username, setUsername] = useState("");
     // const [password, setPassword] = useState("");
   
@@ -17,12 +18,9 @@ export default function Login() {
       };
   
       try {
-        await connectUser(user);
-        console.log("Login successful");
-        // Esegui le azioni desiderate dopo aver effettuato il login
+        await tokenFetch(user);
       } catch (err) {
         console.error("Login failed:", err);
-        // Gestisci l'errore del login in base alle tue esigenze
       }
     };
   return(
