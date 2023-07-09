@@ -1,12 +1,12 @@
+import React from "react";
 
-
-function Greetings(params) {
-    return(
-        <div class="header">
-            <h1>Welcome back<br />Tony Jarvis!</h1>
-            <button class="edit-button">Edit Name</button>
-        </div>
-    )
+function Greetings(props) {
+  return (
+    <div className="header">
+      <h1>Welcome back {props.name}</h1>
+      <button className="edit-button">Edit Name</button>
+    </div>
+  );
 }
 
-export default Greetings
+export default Greetings;

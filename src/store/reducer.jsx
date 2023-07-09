@@ -1,5 +1,6 @@
 const initialState = {
     token: null,
+    name: null
   };
   
   export const tokenReducer = (state = initialState, action) => {
@@ -13,7 +14,6 @@ const initialState = {
     }
   };
   
-  export default tokenReducer;
   
   export const nameReducer = (state = initialState, action) => {
     if (action.type === 'name/addName') {
@@ -27,3 +27,4 @@ const initialState = {
     }
   };
   
+  export default {tokenReducer, nameReducer}
