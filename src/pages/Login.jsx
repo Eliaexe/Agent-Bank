@@ -1,27 +1,21 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import useTokenFetch from '../utils/Fetch';
+
+import { useSelector } from 'react-redux';
+import React, { useEffect } from "react";
 
 export default function Login() {
   const { tokenFetch } = useTokenFetch();
 
   const token = useSelector(state => state.token);
   const name = useSelector(state => state.name);
-  const surname = useSelector(state => state.surname);
 
   useEffect(() => {
-    if (token) {
-      console.log("Token:", token);
+    if (token && name) {
+      // console.log("Data:", token, name.name);
     }
-  }, [token]);
-
-  useEffect(() => {
-    if (name) {
-      console.log("Name:", name, surname );
-    }
-  }, [name, surname]);
+  }, [token, name]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

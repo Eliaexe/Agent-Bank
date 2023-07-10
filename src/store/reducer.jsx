@@ -1,30 +1,33 @@
-const initialState = {
-    token: null,
-    name: null
-  };
+const initialTokenState = {
+  token: null
+};
+
+export const tokenReducer = (state = initialTokenState, action) => {
+  if (action.type === 'token/addToken') {
+    return {
+      ...state,
+      token: action.payload
+    };
+  } else {
+    return state;
+  }
+};
+
+// nameReducer
+const initialNameState = {
+  name: null,
+  lastname: null
+};
+
+export const nameReducer = (state = initialNameState, action) => {
+  if (action.type === 'name/addName') {
+    return {
+      ...state,
+      name: action.payload.name,
+      lastname: action.payload.lastname
+    };
+  } else {
+    return state;
+  }
+};
   
-  export const tokenReducer = (state = initialState, action) => {
-    if (action.type === 'token/addToken') {
-      return {
-        ...state,
-        token: action.payload
-      };
-    } else {
-      return state;
-    }
-  };
-  
-  
-  export const nameReducer = (state = initialState, action) => {
-    if (action.type === 'name/addName') {
-      return {
-        ...state,
-        name: action.payload.name,
-        surname: action.payload.surname
-      };
-    } else {
-      return state;
-    }
-  };
-  
-  export default {tokenReducer, nameReducer}
