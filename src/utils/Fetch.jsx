@@ -24,6 +24,7 @@ export const useTokenFetch = () => {
         const [name] = user.username.split('@');
         let delateTheName = user.username.slice(name.length + 1);
         const lastName = delateTheName.split('.')[0];
+        console.log(token , name, lastName);
         dispatch(saveToken(token))
         dispatch(saveName({ name: name, lastname: lastName }));
         window.location.href = 'http://localhost:3000/profile'
