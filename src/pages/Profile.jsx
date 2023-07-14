@@ -11,18 +11,18 @@ import React, { useEffect } from "react";
 
 export default function Profile() {
   const token = useSelector(state => state.token);
-  const name = useSelector(state => state.name);
+  const name = useSelector(state => state.name.name);
   
-  useEffect(() => {
+  useEffect(() => { 
     if (token && name) {
-      console.log("Data:", token , name.name);
+      // console.log("Data:", token , name.name);
     }
   }, [token, name]);
     return(
         <div>
             <Header />
                 <main className="main bg-dark">
-                    <Greetings name={name.name}/>
+                    <Greetings name={name.name} lastName={name.lastname}/>
                     <Account />
                 </main>
             <h1>Profile</h1>

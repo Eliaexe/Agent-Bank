@@ -24,7 +24,7 @@ export const nameReducer = (state = initialNameState, action) => {
     return {
       ...state,
       name: action.payload.name,
-      lastname: action.payload.lastname
+      lastname: action.payload.lastName
     };
   } else {
     return state;

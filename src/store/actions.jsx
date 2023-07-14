@@ -5,5 +5,5 @@ export const saveToken = token => ({
 
 export const saveName = (name, lastName) => ({
     type: 'name/addName',
-    payload: {name: name, lastName: lastName}
-})
+    payload: { name: name, lastName: lastName }
+  });
