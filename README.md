@@ -1,6 +1,6 @@
 ![Argent Bank Logo](./public/img/argentBankLogo.png)
 # Argent Bank
-
+    - Documentation (https://github.com/Eliaexe/Project-10-Bank-API/blob/master/swagger.yaml) or the swagger.yaml in this repo
 ## Team
 This project was developed by Eliaexe and Openclassrooms.
 
