@@ -4,18 +4,22 @@ import useTokenFetch from '../utils/Fetch';
 
 import { useSelector } from 'react-redux';
 import React, { useEffect } from "react";
+import { Link } from 'react-router-dom';
+
 
 export default function Login() {
   const { tokenFetch } = useTokenFetch();
 
   const token = useSelector(state => state.token);
   const name = useSelector(state => state.name);
+  const log = useSelector(state => state.log)
 
   useEffect(() => {
-    if (token && name) {
+    if (token && name && log) {
       // console.log("Data:", token, name.name);
+      console.log(log);
     }
-  }, [token, name]);
+  }, [token, name, log]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -52,6 +56,9 @@ export default function Login() {
             <div className="input-remember">
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Remember me</label>
+            </div>
+            <div className="newAccount">
+              <Link to="/register" >Register new account</Link>
             </div>
             <button id="submit" className="sign-in-button">Sign In</button>
           </form>

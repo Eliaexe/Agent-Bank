@@ -5,6 +5,8 @@ import Account from "../components/Account"
 import { useSelector } from 'react-redux';
 import React, { useEffect } from "react";
 
+import userDataFetch from "../utils/UserData";
+
 // import { useUserData } from '../utils/Fetch';
 // import { connect } from "react-redux";
 
@@ -13,11 +15,13 @@ export default function Profile() {
   const token = useSelector(state => state.token);
   const name = useSelector(state => state.name.name);
   
-  useEffect(() => { 
-    if (token && name) {
-      // console.log("Data:", token , name.name);
-    }
-  }, [token, name]);
+  userDataFetch(token.token)
+  // useEffect(() => { 
+  //   if (token && name ) {
+  //     // console.log("Data:", token , name.name);
+  //     console.log(token);
+  //   }
+  // }, [token, name]);
     return(
         <div>
             <Header />
@@ -25,7 +29,6 @@ export default function Profile() {
                     <Greetings name={name.name} lastName={name.lastname}/>
                     <Account />
                 </main>
-            <h1>Profile</h1>
             <Footer />
         </div>
     )

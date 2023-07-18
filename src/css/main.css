@@ -56,6 +56,9 @@ html {
 }
 
 .main-nav-item {
+  border: 0px solid;
+  background-color: white;
+  font-size: 16px;
   text-decoration: none;
   margin-right: 0.5rem;
 }
@@ -188,6 +191,13 @@ html {
 
 .input-remember label {
   margin-left: 0.25rem;
+}
+
+.newAccount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
 }
 
 .input-wrapper {

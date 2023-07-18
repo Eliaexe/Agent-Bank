@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import { tokenReducer, nameReducer } from "./reducer";
 
-const rootReducer = combineReducers({
+const ucer = combineReducers({
     token: tokenReducer,
-    name: nameReducer
+    name: nameReducer,
 })
 
-export default rootReducer
+export default ucer

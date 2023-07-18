@@ -5,8 +5,8 @@ import rootReducer from './reducers';
 
 
 const persistConfig = {
-    key: 'root', // Chiave di persistenza, può essere personalizzata
-    storage, // Tipo di storage, ad esempio localStorage
+    key: 'root', 
+    storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -15,4 +15,4 @@ const store = createStore(persistedReducer);
 const persistor = persistStore(store);
 
 export default store
-export {persistor };
+export {persistor};
