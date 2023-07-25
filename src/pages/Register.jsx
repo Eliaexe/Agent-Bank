@@ -53,5 +53,5 @@ return (
       </main>
       <Footer />
     </div>
-  );
+  )
 }

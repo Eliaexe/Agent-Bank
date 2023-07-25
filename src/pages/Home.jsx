@@ -1,16 +1,10 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-// import FetchData from "../utils/Fetch"
-
-// import FetchData from "../utils/Fetch"
-
 
 export default function Home() {
-    // console.log(FetchData);
     return(
         <div className="full-screen">
             <Header />
-
             <main>
                 <div className="hero">
                     <section className="hero-content">
@@ -56,7 +50,6 @@ export default function Home() {
                     </div>
                 </section>
             </main>
-
             <Footer />
         </div>
     )

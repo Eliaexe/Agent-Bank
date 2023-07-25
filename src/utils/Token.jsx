@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { saveToken, saveName } from '../store/actions';
+import userDataFetch from "../utils/UserData";
 
 const url = 'http://localhost:3001/api/v1/user/login';
 
@@ -19,16 +20,13 @@ export const useTokenFetch = () => {
       const userData = await resUserData.json();
       if (resUserData.ok) {
         const token = userData.body.token;
+        const fetchedUserData = await userDataFetch(token) 
 
-        const [name] = user.username.split('@');
-        let delateTheName = user.username.slice(name.length + 1);
-        const lastName = delateTheName.split('.')[0];
-        // console.log(token , name, lastName);
+        const {firstName, lastName} = fetchedUserData
+
         dispatch(saveToken(token));
-        dispatch(saveName({ name: name, lastname: lastName }));
-        // dispatch(logInOut('in'))
+        dispatch(saveName({ name: firstName, lastname: lastName }));
         window.location.href = 'http://localhost:3000/profile';
-        // getData(token)
       } else {
         throw new Error('Error: ' + userData.message);
       }

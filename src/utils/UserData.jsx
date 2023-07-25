@@ -1,7 +1,6 @@
 const urlProfile = 'http://localhost:3001/api/v1/user/profile';
 
 export const userDataFetch = async (token) => {
-    console.log(token);
   try {
     const response = await fetch(urlProfile, {
       method: 'POST',
@@ -14,8 +13,7 @@ export const userDataFetch = async (token) => {
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data);
-      return data;
+      return data.body;
     } else {
       throw new Error('Error: ' + data.message);
     }

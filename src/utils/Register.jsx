@@ -12,7 +12,7 @@ export const registerFetch = async (user) => {
 
     const userData = await resUserData.json();
     if (resUserData.ok) {
-      console.log(userData);
+      // console.log(userData);
     } else {
       throw new Error('Error: ' + userData.message);
     }

@@ -1,31 +1,18 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import useTokenFetch from '../utils/Fetch';
+import useTokenFetch from '../utils/Token';
 
-import { useSelector } from 'react-redux';
-import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 
 export default function Login() {
   const { tokenFetch } = useTokenFetch();
 
-  const token = useSelector(state => state.token);
-  const name = useSelector(state => state.name);
-  const log = useSelector(state => state.log)
-
-  useEffect(() => {
-    if (token && name && log) {
-      // console.log("Data:", token, name.name);
-      console.log(log);
-    }
-  }, [token, name, log]);
-
   const handleLogin = async (e) => {
     e.preventDefault();
 
     const user = {
-      username: document.getElementById('username').value,
+      email: document.getElementById('username').value,
       password: document.getElementById('password').value,
     };
 
@@ -39,7 +26,6 @@ export default function Login() {
   return (
     <div className="full-screen">
       <Header />
-
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
@@ -66,5 +52,5 @@ export default function Login() {
       </main>
       <Footer />
     </div>
-  );
+  )
 }
