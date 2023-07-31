@@ -7,7 +7,7 @@ In the backend folder
 
 ```bash
 # Start the server
-mpm run dev:server
+npm run dev:server
 
 # Start MongoDb
 sudo service mongod start

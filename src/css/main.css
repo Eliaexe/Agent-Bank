@@ -128,7 +128,15 @@ html {
 
 .changeName input {
   height: 30px;
+  margin-top: 10px;
   margin-left: 10px;
+}
+
+@media (max-width: 450px) {
+  .changeName section {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media (min-width: 920px) {
@@ -313,6 +321,8 @@ html {
   background-color: #00bc77;
   color: #fff;
 }
+
+
 
 @media (min-width: 720px) {
   .account {
