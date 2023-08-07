@@ -71,11 +71,12 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string  
       produces:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -87,13 +88,14 @@ paths:
         - Bearer: []
       tags:
         - User Module
-      summary: User Profile API
+      summary: Update User Profile
       description: API for updating a user profile
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string  
         - in: body
           name: body
           description: Update user profile attributes
@@ -104,84 +106,56 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile updated successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
           description: Invalid Fields
         '500':
           description: Internal Server Error
-
-
-  /user/profile/transactions:
-    post:
-      tags:
-        - Transactions Module
-      summary: Create Transaction
-      description: API for creating a new transaction
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-        - in: body
-          name: body
-          description: Transaction Payload
-          required: true
-          schema:
-            $ref: '#/definitions/NewTransactionSchema'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/definitions/TransactionSchema'
-      responses:
-        '201':
-          description: Success - Transaction created successfully
-          schema:
-            $ref: '#/definitions/ApiResponseTransaction'
-        '400':
-          description: Bad Request - Invalid payload
-        '401':
-          description: Bad Request - Unauthorized
-        '500':
-          description: Internal Server Error
+  /transactions:
     get:
       tags:
         - Transactions Module
-      summary: All Transactions
-      description: API for getting all transactions
+      summary: View All Transactions for Current Month
+      description: Retrieve all transactions for the current month, grouped by account
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
+        - name: month
+          in: query
+          description: Month for filtering transactions
+          required: true
+          type: string
       produces:
         - application/json
       responses:
         '200':
-          description: Success - Returns all transactions
+          description: Success - Returns all transactions grouped by account
           schema:
             $ref: '#/definitions/GetAllTransactions'
         '400':
           description: Bad Request - Invalid payload
         '401':
-          description: Bad Request - Unauthorized
+          description: Unauthorized
         '500':
           description: Internal Server Error
 
-  /user/profile/transactions/{id}:
+  /transactions/{id}:
     get:
       tags:
         - Transactions Module
-      summary: Single Transaction
-      description: API for getting a single transaction
+      summary: View Single Transaction Details
+      description: Retrieve details of a single transaction
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
         - name: id
           in: path
           description: Transaction ID
@@ -191,55 +165,63 @@ paths:
         - application/json
       responses:
         '200':
-          description: Success - Return the transaction
+          description: Success - Returns details of the transaction
           schema:
             $ref: '#/definitions/TransactionSchema'
         '400':
           description: Bad Request - Invalid payload
         '401':
-          description: Bad Request - Unauthorized
+          description: Unauthorized
         '500':
           description: Internal Server Error
 
-    delete:
+    post:
       tags:
         - Transactions Module
-      summary: Delete Transaction
-      description: API for deleting a transaction
+      summary: Create Transaction information
+      description: Create a new infomation for a single transaction 
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
         - name: id
           in: path
           description: Transaction ID
           required: true
           type: string
+        - in: body
+          name: body
+          description: New Transaction Payload
+          required: true
+          schema:
+            $ref: '#/definitions/NewTransactionSchema'
       produces:
         - application/json
       responses:
-        '204':
-          description: Success - Transaction deleted successfully
+        '201':
+          description: Success - Transaction information created successfully
           schema:
-            $ref: '#/definitions/ApiResponseTransactionDelete'
+            $ref: '#/definitions/TransactionSchema'
         '400':
           description: Bad Request - Invalid payload
         '401':
-          description: Bad Request - Unauthorized
+          description: Unauthorized
         '500':
           description: Internal Server Error
 
     put:
       tags:
         - Transactions Module
-      summary: Update Transaction
-      description: API for updating a transaction
+      summary: Update Transaction Information
+      description: Update information for a transaction
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
         - name: id
           in: path
           description: Transaction ID
@@ -247,7 +229,7 @@ paths:
           type: string
         - in: body
           name: body
-          description: Update Transaction Payload
+          description: Transaction Payload
           required: true
           schema:
             $ref: '#/definitions/NewTransactionSchema'
@@ -257,13 +239,50 @@ paths:
         '200':
           description: Success - Transaction updated successfully
           schema:
-            $ref: '#/definitions/ApiResponseTransaction'
+            $ref: '#/definitions/TransactionSchema'
         '400':
           description: Bad Request - Invalid payload
         '401':
-          description: Bad Request - Unauthorized
+          description: Unauthorized
         '500':
           description: Internal Server Error
+
+    delete:
+      tags:
+        - Transactions Module
+      summary: Delete Transaction information
+      description: Delete information for a transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: Transaction ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Transaction Payload
+          required: true
+          schema:
+            $ref: '#/definitions/NewTransactionSchema'
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: Success - Transaction specific info deleted successfully
+          schema:
+            $ref: '#/definitions/TransactionSchema'
+        '400':
+          description: Bad Request - Invalid payload
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+
 
 securityDefinitions:
   Bearer:
@@ -272,6 +291,7 @@ securityDefinitions:
     in: header
 definitions:
   User:
+    type: object
     properties:
       email:
         type: string
@@ -286,6 +306,7 @@ definitions:
         type: string
         description: user last name
   Login:
+    type: object
     properties:
       email:
         type: string
@@ -329,54 +350,27 @@ definitions:
       date: 
         type: string
         format: date
-      quantity:
+      amount:
         type: number
       description:
+        type: string
+      type:
+        type: string
+      category:
+        type: string
+      notes:
         type: string
   NewTransactionSchema:
     type: object
     properties:
-      sendTo:
+      category:
         type: string
-      date: 
+      notes:
         type: string
-        format: date
-      quantity:
-        type: number
-      description:
-        type: string
-  ApiResponseTransaction:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          id:
-            type: string
-          sendTo:
-            type: string
-          message:
-            type: string
-  ApiResponseTransactionDelete:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          message:
-            type: string
   GetAllTransactions:
     type: object
     properties:
-      transactions:
+      account:
         type: array
         items:
           $ref: '#/definitions/TransactionSchema'

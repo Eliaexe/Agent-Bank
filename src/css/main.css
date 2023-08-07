@@ -132,6 +132,42 @@ html {
   margin-left: 10px;
 }
 
+header div, header a {
+  display: flex;
+  align-items: center;
+}
+
+header a {
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+header div img {
+  width: 30px;
+  height: 30px;
+  margin-right: 4px;
+}
+
+.profile-logo {
+  border-radius: 50%;
+}
+
+.not-allow{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.not-allow h1 {
+  font-size: 40px;
+  color: red;
+}
+
+.hide {
+  display: none !important;
+}
+
 @media (max-width: 450px) {
   .changeName section {
     display: flex;

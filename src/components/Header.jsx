@@ -1,21 +1,30 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { saveToken } from '../store/actions';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 
 export default function Header() {
   const token = useSelector((state) => state.token);
+  const name = useSelector((state) => state.name.name)
   const isLoggedIn = token.token;
-  const dispatch = useDispatch();
 
   const handleLog = (e) => {
     e.preventDefault();
 
     if (isLoggedIn) {
-        dispatch(saveToken(null));
+      localStorage.clear()
     } 
     window.location.href = 'http://localhost:3000/login'
 
   };
+
+  const profileTag = () => {
+    return(
+      <Link to="/profile">
+        <img src="./img/profile-logo.jpeg" className='profile-logo' alt="profile logo" />
+        <h4>{name.name} {name.lastname}</h4>
+      </Link>
+    )
+  }
 
   return (
     <header>
@@ -29,8 +38,9 @@ export default function Header() {
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
         <div>
+          {isLoggedIn ? profileTag() : ''}
           <Link to="/login" className="main-nav-item" onClick={handleLog}>
-            <i className="fa fa-user-circle"></i>
+            <img src={isLoggedIn ? './img/logout.jpeg' : './img/login-logo.png'} alt={isLoggedIn ? 'logout logo' : 'login logo'} />
             {isLoggedIn ? 'Sign Out' : 'Sign in'}
           </Link>
         </div>
